@@ -1,4 +1,4 @@
-# Cassandra Spy
+# Cassandra Spy [![Tests](https://circleci.com/gh/ajermakovics/cassandra-spy.svg?style=shield)](https://circleci.com/gh/ajermakovics/cassandra-spy) [![](https://jitpack.io/v/org.andrejs/cassandra-spy.svg)](https://jitpack.io/#org.andrejs/cassandra-spy)
 
 Test error cases in code that uses Cassandra.
 
