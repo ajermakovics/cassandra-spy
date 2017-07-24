@@ -1,8 +1,8 @@
 package org.andrejs.cassandra
 
-class Stubbing(val given: Condition) {
+class Stubbing(val condition: Condition) {
     fun willAnswer(answer: Answer) {
-        QuerySpy.answers[given] = answer
+        QuerySpy.answers[condition] = answer
     }
     fun willThrow(ex: Throwable) {
         willAnswer(ThrowAnswer(ex))
