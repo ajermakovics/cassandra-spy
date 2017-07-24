@@ -1,0 +1,26 @@
+group 'org.andrejs'
+version '1.0'
+
+buildscript {
+    ext.kotlin_version = '1.1.2'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.cassandraunit:cassandra-unit:2.1.9.2"
+    compile "com.datastax.cassandra:cassandra-driver-core:3.3.0"
+    compile "junit:junit:4.12"
+}
