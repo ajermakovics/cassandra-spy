@@ -26,22 +26,22 @@ public class CassandraSpyTest {
 
     @Test(expected = WriteTimeoutException.class)
     public void whenInsertPrimedThenThrowsExceptionOnAdd() throws Exception {
-        cassandra.when(insert()).willThrow(writeTimeout());
+        cassandra.when(inserts("users")).willThrow(writeTimeout());
 
         app.addUser(1, "user1");
     }
 
     @Test(expected = ReadTimeoutException.class)
     public void whenSelectPrimedThenThrowsExceptionOnGet() throws Exception {
-        cassandra.when(select()).willThrow(readTimeout());
+        cassandra.when(selects("users")).willThrow(readTimeout());
 
         app.getUser(1);
     }
 
     @Test
     public void whenResetThenNoLongerThrowsException() {
-        cassandra.when(insert()).willThrow(writeTimeout());
-        cassandra.when(select()).willThrow(readTimeout());
+        cassandra.when(inserts("users")).willThrow(writeTimeout());
+        cassandra.when(selects("users")).willThrow(readTimeout());
 
         cassandra.resetSpy();
 

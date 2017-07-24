@@ -43,8 +43,8 @@ class CassandraSpy(private val configYml : String = "cassandra-spy.yml") : Exter
     }
 
     companion object {
-        @JvmStatic fun insert(): Condition = InsertCondition()
-        @JvmStatic fun select(): Condition = SelectCondition()
+        @JvmStatic fun inserts(table: String): Condition = InsertCondition(table)
+        @JvmStatic fun selects(table: String): Condition = SelectCondition(table)
         @JvmStatic fun readTimeout() = ReadTimeoutException(ONE, 0, 0, false)
         @JvmStatic fun writeTimeout() = WriteTimeoutException(SIMPLE, ONE, 0, 0)
     }

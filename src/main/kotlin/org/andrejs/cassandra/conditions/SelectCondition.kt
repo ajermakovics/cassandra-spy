@@ -6,8 +6,14 @@ import org.apache.cassandra.cql3.QueryOptions
 import org.apache.cassandra.cql3.statements.SelectStatement
 import org.apache.cassandra.service.QueryState
 
-class SelectCondition : Condition {
+class SelectCondition(val table: String) : Condition {
+
     override fun applies(statement: CQLStatement, state: QueryState, options: QueryOptions): Boolean {
-        return statement is SelectStatement
+        return if(statement is SelectStatement) {
+            table == statement.columnFamily()
+        } else {
+            false
+        }
     }
+
 }

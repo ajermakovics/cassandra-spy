@@ -6,8 +6,14 @@ import org.apache.cassandra.cql3.QueryOptions
 import org.apache.cassandra.cql3.statements.UpdateStatement
 import org.apache.cassandra.service.QueryState
 
-class InsertCondition : Condition {
+class InsertCondition(val table : String) : Condition {
+
     override fun applies(statement: CQLStatement, state: QueryState, options: QueryOptions): Boolean {
-        return statement is UpdateStatement
+        return if(statement is UpdateStatement) {
+            table == statement.columnFamily()
+        } else {
+            false
+        }
     }
+
 }

@@ -9,12 +9,13 @@ CassandraSpy is a library that helps you:
 - Start embedded Cassandra
 - Throw exceptions for certain queries
 
-It is written as a JUnit rule but can also be used in other contexts like Cucumber tests.
+Implemented as a JUnit rule but can also be used in other contexts like Cucumber tests.
 
 ## Usage
 
 ```java
 public class IntegrationTest {
+    
     @ClassRule
     public static CassandraSpy cassandra = new CassandraSpy();
     
@@ -27,7 +28,7 @@ public class IntegrationTest {
     
     @Test
     public void testInsertFails() throws Exception {
-        cassandra.when(insert()).willThrow(writeTimeout());
+        cassandra.when(inserts("users")).willThrow(writeTimeout());
         
         app.addUser(1, "user"); // does an insert
         
@@ -36,7 +37,7 @@ public class IntegrationTest {
     
     @Test
     public void testSelectFails() throws Exception {
-        cassandra.when(select()).willThrow(readTimeout());
+        cassandra.when(selects("users")).willThrow(readTimeout());
         
         app.getUser(1); // does a select
         
@@ -45,6 +46,9 @@ public class IntegrationTest {
 }
 
 ```
+
+Also see the tests for an example with more details.
+
 # Download
 
 https://jitpack.io/#org.andrejs/cassandra-spy
