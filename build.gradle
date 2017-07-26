@@ -13,9 +13,9 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:1.1.2"
     compile "org.cassandraunit:cassandra-unit:2.1.9.2"
     compile "com.datastax.cassandra:cassandra-driver-core:3.3.0"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:1.1.2"
     compile "junit:junit:4.12"
 }
 
