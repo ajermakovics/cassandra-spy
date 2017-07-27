@@ -31,6 +31,20 @@ public class CassandraSpyTest {
         app.addUser(1, "user1");
     }
 
+    @Test(expected = WriteTimeoutException.class)
+    public void whenInsertWithValuesPrimedThenThrowsExceptionOnAdd() throws Exception {
+        cassandra.when(inserts("users", 1, "user1")).willThrow(writeTimeout());
+
+        app.addUser(1, "user1");
+    }
+
+    @Test
+    public void whenInsertPrimedWithOtherValesThenDoesNotThrow() throws Exception {
+        cassandra.when(inserts("users", 2, "user2")).willThrow(writeTimeout());
+
+        app.addUser(1, "user1");
+    }
+
     @Test(expected = ReadTimeoutException.class)
     public void whenSelectPrimedThenThrowsExceptionOnGet() throws Exception {
         cassandra.when(selects("users")).willThrow(readTimeout());

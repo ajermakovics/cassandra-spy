@@ -7,9 +7,13 @@ Test error cases in code that uses Cassandra.
 CassandraSpy is a library that helps you:
 
 - Start embedded Cassandra
-- Throw exceptions for certain queries
+- Throw exceptions for certain queries so you can test how your application handles them
+- Query Cassandra
 
-Implemented as a JUnit rule but can also be used in other contexts like Cucumber tests.
+Exceptions are triggered in Cassandra server so your application code does not need to be changed 
+and does not need to use mocks.
+
+Cassandra-Spy is implemented as a JUnit rule but can also be used in other contexts like Cucumber scenarios.
 
 ## Usage
 
@@ -43,6 +47,15 @@ public class IntegrationTest {
         
         // assert app does the right thing
     }
+    
+    @Test
+    public void testInsertWithValuesFails() throws Exception {
+        cassandra.when(inserts("users", 2, "user2")).willThrow(writeTimeout());
+        
+        app.addUser(1, "user"); // will not fail
+        app.addUser(2, "user2"); // will fail
+        // ...
+    }
 }
 
 ```
@@ -52,6 +65,16 @@ Also see the tests for an example with more details.
 # Download
 
 https://jitpack.io/#org.andrejs/cassandra-spy
+
+```gradle
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+    
+    dependencies {
+        compile 'org.andrejs:cassandra-spy:{version}'
+    }
+```
 
 # About
 
