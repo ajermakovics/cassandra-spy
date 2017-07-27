@@ -8,7 +8,7 @@ CassandraSpy is a library that helps you:
 
 - Start embedded Cassandra
 - Throw exceptions for certain queries so you can test how your application handles them
-- Query Cassandra
+- Query embedded Cassandra
 
 Exceptions are triggered in Cassandra server so your application code does not need to be changed 
 and does not need to use mocks.
